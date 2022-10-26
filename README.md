@@ -2,6 +2,7 @@
 
 1. [Supervised Learning](#supervised-learning)
     * [Decision Tree](#decision-tree)
+    * [Naive Bayes](#naive-bayes-model-by-maximum-likelihood)
 
 ## Supervised Learning
 #### Text Categorization
@@ -48,3 +49,30 @@ for different number of nodes in the tree.
 
 <img width=500 src="supervised_learning/img/weighted_info_gain_accuracy.png">
 
+
+### Naive Bayes model by Maximum Likelihood
+
+We build the models by learning the following parameters:
+
+* $\theta = P(category \ is \ 1)$
+* $\theta_{i1} = P(word_i \ is \ present \ | category \ is \ 1)$
+* $\theta_{i0} = P(word_i \ is \ present \ | category \ is \ 2)$
+
+To account for words that occur in the test dataset but do not occur in the training dataset,
+we apply a Laplace correction. For each word $i$, the parameters are learned using this formula.
+
+$$ \theta_{i1} = ((number \ of \ documents \ with \ category \ 1 \ and \ word \ i \ present) + 1) 
+                    / (number \ of \ documents \ with \ category \ 1 \ + \ 2) $$ 
+                    
+$$ \theta_{i0} = ((number \ of \ documents \ with \ category \ 2 and \ word \ i \ present) + 1) 
+                    / ((number \ of \ documents \ with \ category \ 2) + 2) $$
+                    
+To learn the Naive Bayes classifier, we assume that the words are independent of each other given the category.
+
+$$ P(Category | word_0 \ word_1 \ ... \ word_n ) \propto [ \Pi_i P(word_i | Category)] P(Category) $$
+
+The documents are classified based on the category with the highest posterior probability $P(Category | words in document)$
+
+Training accuracy: 91.2329%
+
+Testing accuracy: 74.6207%
