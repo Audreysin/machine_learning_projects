@@ -3,6 +3,7 @@
 1. [Supervised Learning](#supervised-learning)
     * [Decision Tree](#decision-tree)
     * [Naive Bayes](#naive-bayes-model-by-maximum-likelihood)
+2. [Unsupervised Leanring](#unsupervised-learning-using-expectation-maximization)
 
 ## Supervised Learning
 #### Text Categorization
@@ -76,3 +77,31 @@ The documents are classified based on the category with the highest posterior pr
 Training accuracy: 91.2329%
 
 Testing accuracy: 74.6207%
+
+## Unsupervised Learning using Expectation Maximization
+
+The dataset consists of information about 2000 patients. The first 3 columns represents whether symptoms A, B, C 
+are present respectively. The fourth column represents whether a particular gene is present. (1 = present, 0 = absent).
+The fifth column represents whether a particular syndrome has been recorded for the patient. (0 = absent, 1 = mild, 2 = severe, -1 = not recorded)
+
+To take into account the data for which the presence of the syndrome was unobserved, we first start by augmenting the data as follows.
+
+e.g
+
+Original data: 
+
+    1 1 0 1 -1
+
+Augmented data: 
+                
+    1 1 0 1 0
+
+    1 1 0 1 1
+                
+    1 1 0 1 2
+    
+We then apply the Expectation Maximization algorithm to learn the conditional probability table of an inferred Bayesian Network.
+
+For different white noise delta, we obtain the following accuracy graph.
+
+<img width=500 src="unsupervised_learning/EM_accuracy.png">
